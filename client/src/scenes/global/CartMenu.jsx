@@ -30,7 +30,7 @@ const CartMenu = () => {
   }, 0);
 
   return (
-    <Box // OVERLAY
+    <Box
       display={isCartOpen ? "block" : "none"}
       backgroundColor="rgba(0, 0, 0, 0.4)"
       position="fixed"
@@ -40,7 +40,6 @@ const CartMenu = () => {
       left="0"
       top="0"
       overflow="auto">
-      {/* MODAL */}
       <Box
         position="fixed"
         right="0"
@@ -67,11 +66,10 @@ const CartMenu = () => {
                       alt={item?.name}
                       width="123px"
                       height="164px"
-                      src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
+                      src={`http://localhost:2000${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
                     />
                   </Box>
                   <Box flex="1 1 60%">
-                    {/* ITEM NAME */}
                     <FlexBox mb="5px">
                       <Typography fontWeight="bold">
                         {item.attributes.name}
@@ -84,8 +82,6 @@ const CartMenu = () => {
                       </IconButton>
                     </FlexBox>
                     <Typography>{item.attributes.shortDescription}</Typography>
-
-                    {/* AMOUNT */}
                     <FlexBox m="15px 0">
                       <Box
                         display="flex"
@@ -105,25 +101,43 @@ const CartMenu = () => {
                           <AddIcon />
                         </IconButton>
                       </Box>
+                      <Typography fontWeight="bold">
+                        ${item.attributes.price}
+                      </Typography>
                     </FlexBox>
-
-                    {/* PRICE */}
-                    <Typography fontWeight="bold">
-                      {item.attributes.price}
-                    </Typography>
                   </Box>
                 </FlexBox>
                 <Divider />
               </Box>
             ))}
+          </Box>
 
-            {/* ACTIONS */}
-            <Box>
-              
-            </Box>
+          {/* ACTIONS */}
+          <Box m="20px 0">
+            <FlexBox m="20px 0">
+              <Typography fontWeight="bold">SUBTOTAL</Typography>
+              <Typography fontWeight="bold">${totalPrice}</Typography>
+            </FlexBox>
+            <Button
+              sx={{
+                backgroundColor: shades.primary[400],
+                color: "white",
+                borderRadius: 0,
+                minWidth: "100%",
+                padding: "20px 40px",
+                m: "20px 0",
+              }}
+              onClick={() => {
+                navigate("/checkout");
+                dispatch(setIsCartOpen({}));
+              }}>
+              CHECKOUT
+            </Button>
           </Box>
         </Box>
       </Box>
     </Box>
   );
 };
+
+export default CartMenu;

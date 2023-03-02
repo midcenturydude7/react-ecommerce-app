@@ -10,10 +10,10 @@ import { useNavigate } from "react-router-dom";
 import { shades } from "../../theme";
 import { setIsCartOpen } from "../../state";
 
-const Navbar = () => {
+function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.state);
+  const cart = useSelector((state) => state.cart.cart);
 
   return (
     <Box
@@ -52,7 +52,7 @@ const Navbar = () => {
           </IconButton>
           <Badge
             badgeContent={cart.length}
-            color="secondar"
+            color="secondary"
             invisible={cart.length === 0}
             sx={{
               "& .MuiBadge-badge": {
@@ -76,6 +76,6 @@ const Navbar = () => {
       </Box>
     </Box>
   );
-};
+}
 
 export default Navbar;
