@@ -16,7 +16,53 @@ const Footer = () => {
         justifyContent="space-between"
         flexWrap="wrap"
         rowGap="30px"
-        columnGap="clamp(20px, 30px, 40px"></Box>
+        columnGap="clamp(20px, 30px, 40px)">
+        <Box width="clamp(20%, 30%, 40%)">
+          <Typography
+            variant="h4"
+            fontWeight="bold"
+            mb="30px"
+            color={shades.secondary[500]}>
+            E&middot;FASHION&middot;ABLE
+          </Typography>
+          <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
+            deserunt minima corrupti? Corrupti officia voluptas, rerum,
+            asperiores repellat praesentium illum eos ullam dolor dolores eum
+            sunt dignissimos harum, quas ut.
+          </div>
+        </Box>
+        <Box>
+          <Typography variant="h4" fontWeight="bold" mb="30px">
+            About us
+          </Typography>
+          <Typography mb="30px">Careers</Typography>
+          <Typography mb="30px">Our Story</Typography>
+          <Typography mb="30px">Terms & Conditions</Typography>
+          <Typography mb="30px">Privacy Policy</Typography>
+        </Box>
+
+        <Box>
+          <Typography variant="h4" fontWeight="bold" mb="30px">
+            Customer Care
+          </Typography>
+          <Typography mb="30px">Help Center</Typography>
+          <Typography mb="30px">Track Your Order</Typography>
+          <Typography mb="30px">Corporate & Bulk Purchasing</Typography>
+          <Typography mb="30px">Returns & Refunds</Typography>
+        </Box>
+
+        <Box width="clamp(20%, 25%, 30%)">
+          <Typography variant="h4" fontWeight="bold" mb="30px">
+            Contact Us
+          </Typography>
+          <Typography mb="30px">
+            50 N Whatever Blvd, Washington, DC 10501
+          </Typography>
+          <Typography mb="30px">Email: somethingsomething@gmail.com</Typography>
+          <Typography mb="30px">(222) 333-4444</Typography>
+        </Box>
+      </Box>
     </Box>
   );
 };
