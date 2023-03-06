@@ -120,8 +120,8 @@ const Checkout = () => {
             handleSubmit,
             setFieldValue,
           }) => (
-            <form onSubit={handleSubmit}>
-              {isFirst && (
+            <form onSubmit={handleSubmit}>
+              {isFirstStep && (
                 <Shipping
                   values={values}
                   errors={errors}
