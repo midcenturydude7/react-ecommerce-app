@@ -1,18 +1,21 @@
-import { Box, useMediaQuery, TextField } from "@mui/material";
 import { getIn } from "formik";
+import { Box } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const AddressForm = ({
   type,
   values,
-  errors,
   touched,
+  errors,
   handleBlur,
   handleChange,
 }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   // these functions allow for better code readability
-  const formattedName = (field) => `${type}. ${field}`;
+  const formattedName = (field) => `${type}.${field}`;
+
   const formattedError = (field) =>
     Boolean(
       getIn(touched, formattedName(field)) &&
@@ -39,7 +42,7 @@ const AddressForm = ({
         value={values.firstName}
         name={formattedName("firstName")}
         error={formattedError("firstName")}
-        helperText={formattedHelper("fistName")}
+        helperText={formattedHelper("firstName")}
         sx={{ gridColumn: "span 2" }}
       />
       <TextField
@@ -81,7 +84,7 @@ const AddressForm = ({
       <TextField
         fullWidth
         type="text"
-        label="Street Address 2"
+        label="Street Address 2 (optional)"
         onBlur={handleBlur}
         onChange={handleChange}
         value={values.street2}

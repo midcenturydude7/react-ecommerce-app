@@ -1,12 +1,11 @@
-/* eslint-disable no-undef */
 import { useSelector } from "react-redux";
 import { Box, Button, Stepper, Step, StepLabel } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
 import { shades } from "../../theme";
-import Shipping from "./Shipping";
 import Payment from "./Payment";
+import Shipping from "./Shipping";
 import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(
@@ -22,7 +21,7 @@ const Checkout = () => {
   const handleFormSubmit = async (values, actions) => {
     setActiveStep(activeStep + 1);
 
-    // copies the billing address onto the shipping address
+    // this copies the billing address onto shipping address
     if (isFirstStep && values.shippingAddress.isSameAddress) {
       actions.setFieldValue("shippingAddress", {
         ...values.billingAddress,
@@ -48,15 +47,14 @@ const Checkout = () => {
       })),
     };
 
-    const response = await fetch("http://localhost:1337/orders", {
+    const response = await fetch("http://localhost:1337/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestBody),
     });
-
     const session = await response.json();
     await stripe.redirectToCheckout({
-      sessoinId: session.id,
+      sessionId: session.id,
     });
   }
 
@@ -72,7 +70,7 @@ const Checkout = () => {
       </Stepper>
       <Box>
         <Formik
-          onSumbit={handleFormSubmit}
+          onSubmit={handleFormSubmit}
           initialValues={initialValues}
           validationSchema={checkoutSchema[activeStep]}>
           {({
@@ -106,7 +104,7 @@ const Checkout = () => {
                 />
               )}
               <Box display="flex" justifyContent="space-between" gap="50px">
-                {isSecondStep && (
+                {!isFirstStep && (
                   <Button
                     fullWidth
                     color="primary"
@@ -115,6 +113,7 @@ const Checkout = () => {
                       backgroundColor: shades.primary[200],
                       boxShadow: "none",
                       color: "white",
+                      borderRadius: 0,
                       padding: "15px 40px",
                     }}
                     onClick={() => setActiveStep(activeStep - 1)}>
@@ -130,10 +129,10 @@ const Checkout = () => {
                     backgroundColor: shades.primary[400],
                     boxShadow: "none",
                     color: "white",
+                    borderRadius: 0,
                     padding: "15px 40px",
-                  }}
-                  onClick={() => setActiveStep(activeStep - 1)}>
-                  {isFirstStep ? "Next" : "Place Order"}
+                  }}>
+                  {!isSecondStep ? "Next" : "Place Order"}
                 </Button>
               </Box>
             </form>
